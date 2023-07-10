@@ -1,7 +1,7 @@
 import { merge, possible_states } from '../src/main.js'
 
 describe('merge', () => {
-  it('should return an array', () => {
+  it('should return an a pass_progresses array', () => {
     const pass_progress = [
       {
 		    pass_id: 1,
@@ -17,7 +17,7 @@ describe('merge', () => {
       }
     ]
 
-    expect(merge(possible_states, pass_progress)).toBe([
+    expect(merge(possible_states, pass_progress)).toStrictEqual([
       {
         pass_id: 1,
         pass_name: 'Lady Gaga',
