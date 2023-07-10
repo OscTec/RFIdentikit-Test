@@ -153,7 +153,30 @@ const pass_progress = [
 */
 
 export function merge(possible_states, pass_progress) {
-	return []
+	const pass_progresses = {}
+
+	pass_progress.forEach((pass) => {
+		const { pass_id, pass_name, status_id } = pass
+
+		if (pass_progresses[pass_id]) {
+			const pass_state = pass_progresses[pass_id].states.find((item) => item.status_id === status_id)
+			pass_state.complete = true
+		} else {
+			const states = possible_states.map((state) => ({
+				status_id: state.status_id,
+				status: state.name,
+				complete: state.status_id === status_id,
+			}))
+
+			pass_progresses[pass_id] = {
+				pass_id,
+				pass_name,
+				states,
+			}
+		}
+	})
+
+	return Object.values(pass_progresses)
 }
 
 const merged = merge(possible_states, pass_progress)
