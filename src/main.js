@@ -1,6 +1,6 @@
 /* A pass can be in one of these 5 states at any given time
  */
-const possible_states = [
+export const possible_states = [
 	{
 		name: 'Draft',
 		status_id: 1,
@@ -152,7 +152,7 @@ const pass_progress = [
     }
 */
 
-function merge(possible_states, pass_progress) {
+export function merge(possible_states, pass_progress) {
 	return []
 }
 
