@@ -163,27 +163,20 @@ export function merge(possible_states, pass_progress) {
 		if (pass_progress) {
 			const pass_state = pass_progress.states.find((item) => item.status_id === status_id)
 			pass_state.complete = true
-		}
+		} else {
+			const states = possible_states.map((state) => {
+				return {
+					status_id: state.status_id,
+					status: state.name,
+					complete: state.status_id === status_id,
+				}
+			})
 
-		if (!pass_progress) {
-			const pass_obj = {
+			pass_progresses.push({
 				pass_id,
 				pass_name,
-				states: possible_states.map((state) => {
-					const { name, status_id } = state
-
-					return {
-						status_id,
-						status: name,
-						complete: false,
-					}
-				}),
-			}
-
-			const current_state = pass_obj.states.find((state) => state.status_id === status_id)
-			current_state.complete = true
-
-			pass_progresses.push(pass_obj)
+				states,
+			})
 		}
 	})
 
